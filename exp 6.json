@@ -1,0 +1,189 @@
+View the rows and columns using head( ) and tail( ) commands
+
+import pandas as pd
+
+car = pd.DataFrame({'Make': ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'Nissan', 'Kia', 'Hyundai', 'BMW'],
+
+'Model': ['Camry', 'Civic', 'F-150', 'Silverado', 'Altima', 'Soul', 'Elantra', 'X5'],
+
+'Year': [2019, 2020, 2018, 2021, 2017, 2022, 2016, 2023],
+
+'Price': [25000, 22000, 28000, 30000, 23000, 20000, 24000, 35000]})
+
+print("First 5 rows of the car dataframe:")
+
+print(car.head())
+
+print("\nLast 5 rows of the car dataframe:")
+
+print(car.tail())
+
+
+
+
+
+
+
+To study selection using ‘loc’ attribute
+
+import pandas as pd
+
+# Create a sample dataframe
+
+car = pd.DataFrame({'Make': ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'Nissan', 'Kia', 'Hyundai', 'BMW'],
+
+'Model': ['Camry', 'Civic', 'F-150', 'Silverado', 'Altima', 'Soul', 'Elantra', 'X5'],
+
+'Year': [2019, 2020, 2018, 2021, 2017, 2022, 2016, 2023],
+
+'Price': [25000, 22000, 28000, 30000, 23000, 20000, 24000, 35000]})
+
+car.set_index('Make', inplace=True)
+
+print("Selecting a single row by label:")
+
+print(car.loc['Toyota'])
+
+print("\nSelecting multiple rows by labels:")
+
+print(car.loc[['Toyota', 'Honda', 'Ford']])
+
+print("\nSelecting a single row by label with specific columns:")
+
+print(car.loc['Toyota', 'Model':'Price'])
+
+print("\nSelecting specific rows and columns by labels:")
+
+print(car.loc[['Toyota', 'Honda'], ['Model', 'Year']])
+
+print("\nSelecting rows based on a boolean condition:")
+
+print(car.loc[car['Year'] > 2020])
+
+
+
+
+
+Indexing
+
+import pandas as pd
+
+# Create a sample dataframe
+
+data = {'Name': ['Dave', 'Alice', 'Bob', 'Charlie', 'David'],
+
+'Age': [25, 30, 35, 40, 45],
+
+'City': ['New York', 'Los Angeles', 'Chicago', 'San Francisco', 'Houston']}
+
+df = pd.DataFrame(data)
+
+print("Original DataFrame:")
+
+print(df)
+
+df.set_index('Name', inplace=True)
+
+print("\nDataFrame with 'Name' column as index:")
+
+print(df)
+
+print("\nAccess data using label-based indexing (loc):")
+
+print(df.loc['Dave'])
+
+print('\n')
+
+print(df.loc[['Dave', 'Bob']])
+
+print('\n')
+
+print(df.loc['Dave', 'Age'])
+
+print("\nAccess data using boolean-based indexing:")
+
+print(df[df['Age'] > 30])
+
+
+
+
+
+
+
+To view the nonnull information using ‘info’ command
+
+import pandas as pd
+
+df = pd.read_csv('/content/nba.csv')
+
+print("\nNon-null information of the dataframe:")
+
+print(df.info())
+
+
+
+
+
+
+
+
+
+Data cleaning using fillna and dropna commands
+
+import pandas as pd
+
+data = {'Name': ['Dave', 'Alice', None, 'Charlie', 'David'],
+
+'Age': [25, None, 35, None, 45],
+
+'City': ['New York', 'Los Angeles', None, 'San Francisco', 'Houston']}
+
+df = pd.DataFrame(data)
+
+print("Original DataFrame:")
+
+print(df)
+
+df['Age'].fillna(df['Age'].mean(), inplace=True)
+
+df['Name'].fillna('Unknown', inplace=True)
+
+print("\nDataFrame after filling missing values:")
+
+print(df)
+
+df.dropna(subset=['City'], inplace=True)
+
+print("\nDataFrame after dropping rows with missing values:")
+
+print(df)
+
+
+
+
+
+Replacing the missing values by mean,max and median values
+
+data = pd.read_csv('/content/DataSet.csv')
+
+data['quantity'] = data['quantity'].fillna(data['quantity'].mean())
+
+data['price'] = data['price'].fillna(data['price'].median())
+
+data['bought'] = data['bought'].fillna(data['bought'].std())
+
+data['forenoon'] = data['forenoon'].fillna(data['forenoon'].min())
+
+data['afternoon'] = data['afternoon'].fillna(data['afternoon'].max())
+
+print(data)
+
+
+
+
+
+View the correlation between the columns using corr command function
+
+df = pd.read_csv('data.csv')
+
+print(df.corr())
